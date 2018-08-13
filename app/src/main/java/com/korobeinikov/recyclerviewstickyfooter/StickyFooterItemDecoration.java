@@ -35,17 +35,17 @@ public class StickyFooterItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private int calculateTopOffset(RecyclerView parent, View footerView, int itemCount) {
-        int topOffset = parent.getHeight() - visibleChildsHeightWithFooter(parent, footerView, itemCount);
+        int topOffset = parent.getHeight() - visibleChildrenHeightWithFooter(parent, footerView, itemCount);
         return topOffset < 0 ? 0 : topOffset;
     }
 
-    private int visibleChildsHeightWithFooter(RecyclerView parent, View footerView, int itemCount) {
+    private int visibleChildrenHeightWithFooter(RecyclerView parent, View footerView, int itemCount) {
         int totalHeight = 0;
         int onScreenItemCount = Math.min(parent.getChildCount(), itemCount);
         for (int i = 0; i < onScreenItemCount - 1; i++) {
             totalHeight += parent.getChildAt(i).getHeight();
         }
-        return totalHeight + footerView.getHeight();
+        return totalHeight + footerView.getHeight() + parent.getPaddingTop() + parent.getPaddingBottom();
     }
 
     private boolean isFooter(RecyclerView parent, View view, int itemCount) {
