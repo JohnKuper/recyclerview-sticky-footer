@@ -43,7 +43,9 @@ public class StickyFooterItemDecoration extends RecyclerView.ItemDecoration {
         int totalHeight = 0;
         int onScreenItemCount = Math.min(parent.getChildCount(), itemCount);
         for (int i = 0; i < onScreenItemCount - 1; i++) {
-            totalHeight += parent.getChildAt(i).getHeight();
+            View child = parent.getChildAt(i);
+            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
+            totalHeight += child.getHeight() + layoutParams.topMargin + layoutParams.bottomMargin;
         }
         return totalHeight + footerView.getHeight() + parent.getPaddingTop() + parent.getPaddingBottom();
     }
